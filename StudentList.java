@@ -33,6 +33,7 @@ public class StudentList {
             System.out.println(constant.Invalid);
             System.exit(1);
         }
+
         if(args[0].equals(constant.showNames)) {
             System.out.println(constant.loadingData);
             Reader();
@@ -41,6 +42,7 @@ public class StudentList {
                 System.out.println(name); 
             }
             System.out.println(constant.loadedData);
+
         } else if(args[0].equals(constant.randomNmae)) {
             System.out.println(constant.loadingData);
             Reader();
@@ -48,63 +50,56 @@ public class StudentList {
             Random ran = new Random();
             int randomIndex = ran.nextInt(names.length);
             System.out.println(names[randomIndex]);
-            System.out.println(constant.loadedData);         
+            System.out.println(constant.loadedData);  
+
         } else if(args[0].contains(constant.addName)) {
             System.out.println(constant.loadingData);
             Reader();   
             String newName = args[0].substring(1);
             studentNames = studentNames + constant.split + newName;
-
             Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat(constant.dateFormat);
-            String fd= dateFormat.format(date);   
-            String updateText = studentNames + constant.lastUpdate + fd;
-
-            Write(updateText); 
+            String fd= dateFormat.format(date);
+            Write(studentNames + constant.lastUpdate + fd); 
             System.out.println(constant.loadedData); 
-        } else if(args[0].contains(constant.query)) {
-            System.out.println(constant.loadingData);         
-            try {
-                Reader();
-                String names[] = studentNames.split(constant.split);   
-                boolean done = false;
-                String name = args[0].substring(1);
-                for(int idx = 0; idx < names.length && (!done); idx++) {
-                    if(names[idx].equals(name)) {
-                        System.out.println(constant.Found);
-                        done=true;
-                    }
-                }
-                if (!done) {
-                    System.out.println(constant.notFound);
-                }
-            } catch (Exception e){
 
-            } 
-            System.out.println(constant.loadedData);             
+        } else if(args[0].contains(constant.query)) {
+            System.out.println(constant.loadingData);     
+            Reader();
+            String names[] = studentNames.split(constant.split);   
+            boolean done = false;
+            String name = args[0].substring(1);
+            for(int idx = 0; idx < names.length && (!done); idx++) {
+                if(names[idx].equals(name)) {
+                    System.out.println(constant.Found);
+                    done=true;
+                }
+            }
+            if (!done) {
+                System.out.println(constant.notFound);
+            }
+            System.out.println(constant.loadedData);   
+
         } else if(args[0].equals(constant.countWords)) {
-            System.out.println(constant.loadingData);         
-            try {
-                Reader();
-                char arr[] = studentNames.toCharArray();            
-                boolean in_word = false;
-                int count = 0;
-                for(char ch : arr) {
-                    if(ch == ' ' && in_word) {
-                        count++;
-                        in_word = false;            
-                    } else {
-                        in_word = true;
-                    }
-                }
-                if (in_word) {
+            System.out.println(constant.loadingData); 
+            Reader();
+            char arr[] = studentNames.toCharArray();            
+            boolean in_word = false;
+            int count = 0;
+            for(char ch : arr) {
+                if(ch == ' ' && in_word) {
                     count++;
+                    in_word = false;            
+                } else {
+                    in_word = true;
                 }
-                System.out.println(count + constant.wordsFound);
-            } catch (Exception e){
- 
-            } 
-            System.out.println(constant.loadedData);             
+            }
+            if (in_word) {
+                count++;
+            }
+            System.out.println(count + constant.wordsFound);
+            System.out.println(constant.loadedData);     
+                    
         } else {
             System.out.println(constant.Invalid);
         }
