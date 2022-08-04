@@ -54,10 +54,8 @@ public class StudentList {
             System.out.println(constant.loadingData);
             Reader();
             studentNames = studentNames + constant.split + args[0].substring(1);
-            Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat(constant.dateFormat);
-            String fd= dateFormat.format(date);
-            Write(studentNames + constant.lastUpdate + fd); 
+            Write(studentNames + constant.lastUpdate + dateFormat.format(new Date())); 
             System.out.println(constant.loadedData); 
 
         } else if(args[0].contains(constant.query)) {
